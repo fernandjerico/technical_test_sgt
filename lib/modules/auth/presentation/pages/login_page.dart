@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:technical_test_sgt/modules/home/presentation/pages/home_page.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 
@@ -75,7 +76,12 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 24),
                 Button.filled(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
+                      }
                     },
                     label: 'Login')
               ],
