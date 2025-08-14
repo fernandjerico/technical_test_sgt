@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:technical_test_sgt/core/theme/app_colors.dart';
 import 'dart:ui';
 import 'package:technical_test_sgt/modules/auth/presentation/pages/login_page.dart';
+import 'package:technical_test_sgt/modules/home/presentation/pages/weather_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -269,7 +270,16 @@ class _HomePageState extends State<HomePage>
                               size: 28,
                             ),
                           ),
-                          SvgPicture.asset('assets/icons/icon-list.svg'),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => WeatherPage(),
+                                    ));
+                              },
+                              icon: SvgPicture.asset(
+                                  'assets/icons/icon-list.svg')),
                         ],
                       )
                     ],
