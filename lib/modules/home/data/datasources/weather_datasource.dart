@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:technical_test_sgt/core/service/dio_service.dart';
 import 'package:technical_test_sgt/modules/home/data/models/current_weather_response_model.dart';
 
@@ -12,10 +14,11 @@ class WeatherDatasourceImpl implements WeatherDatasource {
   @override
   Future<CurrentWeatherResponseModel> getWeatherData(
       String latitude, String longitude) async {
-    final response =
-        await dio.get('/data/2.5/weather?lat=$latitude&lon=$longitude');
+    final response = await dio
+        .get('/data/2.5/weather?lat=$latitude&lon=$longitude&units=metric');
     if (response.statusCode == 200) {
-      return CurrentWeatherResponseModel.fromJson(response.data);
+      log('Weather data fetched successfully: ${response.data}');
+      return CurrentWeatherResponseModel.fromMap(response.data);
     } else {
       throw Exception('Failed to load weather data');
     }

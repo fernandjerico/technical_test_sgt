@@ -7,7 +7,6 @@ class CurrentWeatherResponseModel {
   final Main? main;
   final int? visibility;
   final Wind? wind;
-  final Rain? rain;
   final Clouds? clouds;
   final int? dt;
   final Sys? sys;
@@ -23,7 +22,6 @@ class CurrentWeatherResponseModel {
     this.main,
     this.visibility,
     this.wind,
-    this.rain,
     this.clouds,
     this.dt,
     this.sys,
@@ -49,7 +47,6 @@ class CurrentWeatherResponseModel {
         main: json["main"] == null ? null : Main.fromMap(json["main"]),
         visibility: json["visibility"],
         wind: json["wind"] == null ? null : Wind.fromMap(json["wind"]),
-        rain: json["rain"] == null ? null : Rain.fromMap(json["rain"]),
         clouds: json["clouds"] == null ? null : Clouds.fromMap(json["clouds"]),
         dt: json["dt"],
         sys: json["sys"] == null ? null : Sys.fromMap(json["sys"]),
@@ -68,7 +65,6 @@ class CurrentWeatherResponseModel {
         "main": main?.toMap(),
         "visibility": visibility,
         "wind": wind?.toMap(),
-        "rain": rain?.toMap(),
         "clouds": clouds?.toMap(),
         "dt": dt,
         "sys": sys?.toMap(),
@@ -171,36 +167,12 @@ class Main {
       };
 }
 
-class Rain {
-  final double? the1H;
-
-  Rain({
-    this.the1H,
-  });
-
-  factory Rain.fromJson(String str) => Rain.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory Rain.fromMap(Map<String, dynamic> json) => Rain(
-        the1H: json["1h"]?.toDouble(),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "1h": the1H,
-      };
-}
-
 class Sys {
-  final int? type;
-  final int? id;
   final String? country;
   final int? sunrise;
   final int? sunset;
 
   Sys({
-    this.type,
-    this.id,
     this.country,
     this.sunrise,
     this.sunset,
@@ -211,16 +183,12 @@ class Sys {
   String toJson() => json.encode(toMap());
 
   factory Sys.fromMap(Map<String, dynamic> json) => Sys(
-        type: json["type"],
-        id: json["id"],
         country: json["country"],
         sunrise: json["sunrise"],
         sunset: json["sunset"],
       );
 
   Map<String, dynamic> toMap() => {
-        "type": type,
-        "id": id,
         "country": country,
         "sunrise": sunrise,
         "sunset": sunset,
