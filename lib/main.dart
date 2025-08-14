@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => GetWeatherHourlyBloc()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Weather Forecast App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
