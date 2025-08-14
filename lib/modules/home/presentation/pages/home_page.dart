@@ -7,6 +7,7 @@ import 'package:technical_test_sgt/modules/auth/presentation/pages/login_page.da
 import 'package:technical_test_sgt/modules/home/presentation/pages/weather_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/get_current_weather/get_current_weather_bloc.dart';
+import '../bloc/get_weather_hourly/get_weather_hourly_bloc.dart';
 import '../widgets/weather_initial.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,14 +67,24 @@ class _HomePageState extends State<HomePage>
       longitude = position.longitude.toString();
     });
     if (latitude != null && longitude != null) {
-      if (mounted) {
-        context.read<GetCurrentWeatherBloc>().add(
-              GetCurrentWeatherEvent.getCurrentWeather(
-                latitude: latitude!,
-                longitude: longitude!,
-              ),
-            );
-      }
+      Future.microtask(
+        () {
+          if (mounted) {
+            context.read<GetCurrentWeatherBloc>().add(
+                  GetCurrentWeatherEvent.getCurrentWeather(
+                    latitude: latitude!,
+                    longitude: longitude!,
+                  ),
+                );
+            context.read<GetWeatherHourlyBloc>().add(
+                  GetWeatherHourlyEvent.getWeatherHourly(
+                    latitude: latitude!,
+                    longitude: longitude!,
+                  ),
+                );
+          }
+        },
+      );
     }
   }
 
@@ -220,45 +231,89 @@ class _HomePageState extends State<HomePage>
                             controller: _tabController,
                             children: [
                               // Hourly Forecast Tab
-                              ListView.builder(
-                                itemCount: 24,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 16, horizontal: 8),
-                                    margin: EdgeInsets.only(right: 6, left: 6),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        color:
-                                            Colors.white.withValues(alpha: 0.2),
-                                        width: 1,
+                              BlocBuilder<GetWeatherHourlyBloc,
+                                  GetWeatherHourlyState>(
+                                builder: (context, state) {
+                                  return state.maybeWhen(
+                                    orElse: () => Center(
+                                        child: CircularProgressIndicator()),
+                                    error: (message) => Center(
+                                      child: Text(
+                                        message,
+                                        style:
+                                            const TextStyle(color: Colors.red),
                                       ),
                                     ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '12 AM',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppColors.whiteColor),
-                                        ),
-                                        Image.asset(
-                                            'assets/icons/cloud-mid-rain.png'),
-                                        Text(
-                                          '19°',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppColors.whiteColor),
-                                        ),
-                                      ],
-                                    ),
+                                    loaded: (weather) {
+                                      return ListView.builder(
+                                        itemCount: weather.list?.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) {
+                                          final item = weather.list![index];
+                                          String time = '-';
+                                          if (item.dtTxt != null) {
+                                            final hour = item.dtTxt!.hour
+                                                .toString()
+                                                .padLeft(2, '0');
+                                            final minute = item.dtTxt!.minute
+                                                .toString()
+                                                .padLeft(2, '0');
+                                            time = '$hour:$minute';
+                                          }
+                                          return Container(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 8),
+                                            margin: EdgeInsets.only(
+                                                right: 6, left: 6),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                color: Colors.white
+                                                    .withValues(alpha: 0.2),
+                                                width: 1,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  time,
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color:
+                                                          AppColors.whiteColor),
+                                                ),
+                                                Text(
+                                                    item.weather?[0].main
+                                                            ?.name ??
+                                                        '-',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: AppColors
+                                                            .whiteColor)),
+                                                Text(
+                                                  '${item.main?.temp?.round() ?? '-'}°C',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          AppColors.whiteColor),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
                                   );
                                 },
                               ),
