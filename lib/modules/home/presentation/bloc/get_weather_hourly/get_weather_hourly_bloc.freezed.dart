@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_current_weather_bloc.dart';
+part of 'get_weather_hourly_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,67 +15,67 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetCurrentWeatherEvent {
+mixin _$GetWeatherHourlyEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String latitude, String longitude)
-        getCurrentWeather,
+        getWeatherHourly,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String latitude, String longitude)? getCurrentWeather,
+    TResult? Function(String latitude, String longitude)? getWeatherHourly,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String latitude, String longitude)? getCurrentWeather,
+    TResult Function(String latitude, String longitude)? getWeatherHourly,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetCurrentWeather value) getCurrentWeather,
+    required TResult Function(_GetWeatherHourly value) getWeatherHourly,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetCurrentWeather value)? getCurrentWeather,
+    TResult? Function(_GetWeatherHourly value)? getWeatherHourly,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetCurrentWeather value)? getCurrentWeather,
+    TResult Function(_GetWeatherHourly value)? getWeatherHourly,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetCurrentWeatherEventCopyWith<$Res> {
-  factory $GetCurrentWeatherEventCopyWith(GetCurrentWeatherEvent value,
-          $Res Function(GetCurrentWeatherEvent) then) =
-      _$GetCurrentWeatherEventCopyWithImpl<$Res, GetCurrentWeatherEvent>;
+abstract class $GetWeatherHourlyEventCopyWith<$Res> {
+  factory $GetWeatherHourlyEventCopyWith(GetWeatherHourlyEvent value,
+          $Res Function(GetWeatherHourlyEvent) then) =
+      _$GetWeatherHourlyEventCopyWithImpl<$Res, GetWeatherHourlyEvent>;
 }
 
 /// @nodoc
-class _$GetCurrentWeatherEventCopyWithImpl<$Res,
-        $Val extends GetCurrentWeatherEvent>
-    implements $GetCurrentWeatherEventCopyWith<$Res> {
-  _$GetCurrentWeatherEventCopyWithImpl(this._value, this._then);
+class _$GetWeatherHourlyEventCopyWithImpl<$Res,
+        $Val extends GetWeatherHourlyEvent>
+    implements $GetWeatherHourlyEventCopyWith<$Res> {
+  _$GetWeatherHourlyEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetCurrentWeatherEvent
+  /// Create a copy of GetWeatherHourlyEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -88,13 +88,13 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$GetCurrentWeatherEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$GetWeatherHourlyEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCurrentWeatherEvent
+  /// Create a copy of GetWeatherHourlyEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -105,7 +105,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'GetCurrentWeatherEvent.started()';
+    return 'GetWeatherHourlyEvent.started()';
   }
 
   @override
@@ -122,7 +122,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String latitude, String longitude)
-        getCurrentWeather,
+        getWeatherHourly,
   }) {
     return started();
   }
@@ -131,7 +131,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String latitude, String longitude)? getCurrentWeather,
+    TResult? Function(String latitude, String longitude)? getWeatherHourly,
   }) {
     return started?.call();
   }
@@ -140,7 +140,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String latitude, String longitude)? getCurrentWeather,
+    TResult Function(String latitude, String longitude)? getWeatherHourly,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -153,7 +153,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetCurrentWeather value) getCurrentWeather,
+    required TResult Function(_GetWeatherHourly value) getWeatherHourly,
   }) {
     return started(this);
   }
@@ -162,7 +162,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetCurrentWeather value)? getCurrentWeather,
+    TResult? Function(_GetWeatherHourly value)? getWeatherHourly,
   }) {
     return started?.call(this);
   }
@@ -171,7 +171,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetCurrentWeather value)? getCurrentWeather,
+    TResult Function(_GetWeatherHourly value)? getWeatherHourly,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -181,28 +181,28 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements GetCurrentWeatherEvent {
+abstract class _Started implements GetWeatherHourlyEvent {
   const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$GetCurrentWeatherImplCopyWith<$Res> {
-  factory _$$GetCurrentWeatherImplCopyWith(_$GetCurrentWeatherImpl value,
-          $Res Function(_$GetCurrentWeatherImpl) then) =
-      __$$GetCurrentWeatherImplCopyWithImpl<$Res>;
+abstract class _$$GetWeatherHourlyImplCopyWith<$Res> {
+  factory _$$GetWeatherHourlyImplCopyWith(_$GetWeatherHourlyImpl value,
+          $Res Function(_$GetWeatherHourlyImpl) then) =
+      __$$GetWeatherHourlyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String latitude, String longitude});
 }
 
 /// @nodoc
-class __$$GetCurrentWeatherImplCopyWithImpl<$Res>
-    extends _$GetCurrentWeatherEventCopyWithImpl<$Res, _$GetCurrentWeatherImpl>
-    implements _$$GetCurrentWeatherImplCopyWith<$Res> {
-  __$$GetCurrentWeatherImplCopyWithImpl(_$GetCurrentWeatherImpl _value,
-      $Res Function(_$GetCurrentWeatherImpl) _then)
+class __$$GetWeatherHourlyImplCopyWithImpl<$Res>
+    extends _$GetWeatherHourlyEventCopyWithImpl<$Res, _$GetWeatherHourlyImpl>
+    implements _$$GetWeatherHourlyImplCopyWith<$Res> {
+  __$$GetWeatherHourlyImplCopyWithImpl(_$GetWeatherHourlyImpl _value,
+      $Res Function(_$GetWeatherHourlyImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCurrentWeatherEvent
+  /// Create a copy of GetWeatherHourlyEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -210,7 +210,7 @@ class __$$GetCurrentWeatherImplCopyWithImpl<$Res>
     Object? latitude = null,
     Object? longitude = null,
   }) {
-    return _then(_$GetCurrentWeatherImpl(
+    return _then(_$GetWeatherHourlyImpl(
       latitude: null == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -225,8 +225,8 @@ class __$$GetCurrentWeatherImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetCurrentWeatherImpl implements _GetCurrentWeather {
-  const _$GetCurrentWeatherImpl(
+class _$GetWeatherHourlyImpl implements _GetWeatherHourly {
+  const _$GetWeatherHourlyImpl(
       {required this.latitude, required this.longitude});
 
   @override
@@ -236,14 +236,14 @@ class _$GetCurrentWeatherImpl implements _GetCurrentWeather {
 
   @override
   String toString() {
-    return 'GetCurrentWeatherEvent.getCurrentWeather(latitude: $latitude, longitude: $longitude)';
+    return 'GetWeatherHourlyEvent.getWeatherHourly(latitude: $latitude, longitude: $longitude)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetCurrentWeatherImpl &&
+            other is _$GetWeatherHourlyImpl &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
@@ -253,13 +253,13 @@ class _$GetCurrentWeatherImpl implements _GetCurrentWeather {
   @override
   int get hashCode => Object.hash(runtimeType, latitude, longitude);
 
-  /// Create a copy of GetCurrentWeatherEvent
+  /// Create a copy of GetWeatherHourlyEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetCurrentWeatherImplCopyWith<_$GetCurrentWeatherImpl> get copyWith =>
-      __$$GetCurrentWeatherImplCopyWithImpl<_$GetCurrentWeatherImpl>(
+  _$$GetWeatherHourlyImplCopyWith<_$GetWeatherHourlyImpl> get copyWith =>
+      __$$GetWeatherHourlyImplCopyWithImpl<_$GetWeatherHourlyImpl>(
           this, _$identity);
 
   @override
@@ -267,29 +267,29 @@ class _$GetCurrentWeatherImpl implements _GetCurrentWeather {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String latitude, String longitude)
-        getCurrentWeather,
+        getWeatherHourly,
   }) {
-    return getCurrentWeather(latitude, longitude);
+    return getWeatherHourly(latitude, longitude);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String latitude, String longitude)? getCurrentWeather,
+    TResult? Function(String latitude, String longitude)? getWeatherHourly,
   }) {
-    return getCurrentWeather?.call(latitude, longitude);
+    return getWeatherHourly?.call(latitude, longitude);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String latitude, String longitude)? getCurrentWeather,
+    TResult Function(String latitude, String longitude)? getWeatherHourly,
     required TResult orElse(),
   }) {
-    if (getCurrentWeather != null) {
-      return getCurrentWeather(latitude, longitude);
+    if (getWeatherHourly != null) {
+      return getWeatherHourly(latitude, longitude);
     }
     return orElse();
   }
@@ -298,56 +298,57 @@ class _$GetCurrentWeatherImpl implements _GetCurrentWeather {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_GetCurrentWeather value) getCurrentWeather,
+    required TResult Function(_GetWeatherHourly value) getWeatherHourly,
   }) {
-    return getCurrentWeather(this);
+    return getWeatherHourly(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_GetCurrentWeather value)? getCurrentWeather,
+    TResult? Function(_GetWeatherHourly value)? getWeatherHourly,
   }) {
-    return getCurrentWeather?.call(this);
+    return getWeatherHourly?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_GetCurrentWeather value)? getCurrentWeather,
+    TResult Function(_GetWeatherHourly value)? getWeatherHourly,
     required TResult orElse(),
   }) {
-    if (getCurrentWeather != null) {
-      return getCurrentWeather(this);
+    if (getWeatherHourly != null) {
+      return getWeatherHourly(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetCurrentWeather implements GetCurrentWeatherEvent {
-  const factory _GetCurrentWeather(
+abstract class _GetWeatherHourly implements GetWeatherHourlyEvent {
+  const factory _GetWeatherHourly(
       {required final String latitude,
-      required final String longitude}) = _$GetCurrentWeatherImpl;
+      required final String longitude}) = _$GetWeatherHourlyImpl;
 
   String get latitude;
   String get longitude;
 
-  /// Create a copy of GetCurrentWeatherEvent
+  /// Create a copy of GetWeatherHourlyEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetCurrentWeatherImplCopyWith<_$GetCurrentWeatherImpl> get copyWith =>
+  _$$GetWeatherHourlyImplCopyWith<_$GetWeatherHourlyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$GetCurrentWeatherState {
+mixin _$GetWeatherHourlyState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentWeatherResponseModel weather) loaded,
+    required TResult Function(WeatherForecastHourlyResponseModel weather)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -355,7 +356,7 @@ mixin _$GetCurrentWeatherState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult? Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -363,7 +364,7 @@ mixin _$GetCurrentWeatherState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -396,24 +397,24 @@ mixin _$GetCurrentWeatherState {
 }
 
 /// @nodoc
-abstract class $GetCurrentWeatherStateCopyWith<$Res> {
-  factory $GetCurrentWeatherStateCopyWith(GetCurrentWeatherState value,
-          $Res Function(GetCurrentWeatherState) then) =
-      _$GetCurrentWeatherStateCopyWithImpl<$Res, GetCurrentWeatherState>;
+abstract class $GetWeatherHourlyStateCopyWith<$Res> {
+  factory $GetWeatherHourlyStateCopyWith(GetWeatherHourlyState value,
+          $Res Function(GetWeatherHourlyState) then) =
+      _$GetWeatherHourlyStateCopyWithImpl<$Res, GetWeatherHourlyState>;
 }
 
 /// @nodoc
-class _$GetCurrentWeatherStateCopyWithImpl<$Res,
-        $Val extends GetCurrentWeatherState>
-    implements $GetCurrentWeatherStateCopyWith<$Res> {
-  _$GetCurrentWeatherStateCopyWithImpl(this._value, this._then);
+class _$GetWeatherHourlyStateCopyWithImpl<$Res,
+        $Val extends GetWeatherHourlyState>
+    implements $GetWeatherHourlyStateCopyWith<$Res> {
+  _$GetWeatherHourlyStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -426,13 +427,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$GetCurrentWeatherStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$GetWeatherHourlyStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -443,7 +444,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'GetCurrentWeatherState.initial()';
+    return 'GetWeatherHourlyState.initial()';
   }
 
   @override
@@ -460,7 +461,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentWeatherResponseModel weather) loaded,
+    required TResult Function(WeatherForecastHourlyResponseModel weather)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -471,7 +473,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult? Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -482,7 +484,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -530,7 +532,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements GetCurrentWeatherState {
+abstract class _Initial implements GetWeatherHourlyState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -543,13 +545,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$GetCurrentWeatherStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$GetWeatherHourlyStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -560,7 +562,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'GetCurrentWeatherState.loading()';
+    return 'GetWeatherHourlyState.loading()';
   }
 
   @override
@@ -577,7 +579,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentWeatherResponseModel weather) loaded,
+    required TResult Function(WeatherForecastHourlyResponseModel weather)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -588,7 +591,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult? Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -599,7 +602,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -647,7 +650,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements GetCurrentWeatherState {
+abstract class _Loading implements GetWeatherHourlyState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -657,29 +660,29 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CurrentWeatherResponseModel weather});
+  $Res call({WeatherForecastHourlyResponseModel weather});
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$GetCurrentWeatherStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$GetWeatherHourlyStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? weather = null,
+    Object? weather = freezed,
   }) {
     return _then(_$LoadedImpl(
-      null == weather
+      freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as CurrentWeatherResponseModel,
+              as WeatherForecastHourlyResponseModel,
     ));
   }
 }
@@ -690,11 +693,11 @@ class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(this.weather);
 
   @override
-  final CurrentWeatherResponseModel weather;
+  final WeatherForecastHourlyResponseModel weather;
 
   @override
   String toString() {
-    return 'GetCurrentWeatherState.loaded(weather: $weather)';
+    return 'GetWeatherHourlyState.loaded(weather: $weather)';
   }
 
   @override
@@ -702,13 +705,14 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            (identical(other.weather, weather) || other.weather == weather));
+            const DeepCollectionEquality().equals(other.weather, weather));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, weather);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(weather));
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -721,7 +725,8 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentWeatherResponseModel weather) loaded,
+    required TResult Function(WeatherForecastHourlyResponseModel weather)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(weather);
@@ -732,7 +737,7 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult? Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(weather);
@@ -743,7 +748,7 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -791,13 +796,13 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements GetCurrentWeatherState {
-  const factory _Loaded(final CurrentWeatherResponseModel weather) =
+abstract class _Loaded implements GetWeatherHourlyState {
+  const factory _Loaded(final WeatherForecastHourlyResponseModel weather) =
       _$LoadedImpl;
 
-  CurrentWeatherResponseModel get weather;
+  WeatherForecastHourlyResponseModel get weather;
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -815,13 +820,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$GetCurrentWeatherStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$GetWeatherHourlyStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -847,7 +852,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'GetCurrentWeatherState.error(message: $message)';
+    return 'GetWeatherHourlyState.error(message: $message)';
   }
 
   @override
@@ -861,7 +866,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -874,7 +879,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CurrentWeatherResponseModel weather) loaded,
+    required TResult Function(WeatherForecastHourlyResponseModel weather)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -885,7 +891,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult? Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -896,7 +902,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CurrentWeatherResponseModel weather)? loaded,
+    TResult Function(WeatherForecastHourlyResponseModel weather)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -944,12 +950,12 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements GetCurrentWeatherState {
+abstract class _Error implements GetWeatherHourlyState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;
 
-  /// Create a copy of GetCurrentWeatherState
+  /// Create a copy of GetWeatherHourlyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
