@@ -122,9 +122,10 @@ class ListElement {
   final Clouds? clouds;
   final Wind? wind;
   final int? visibility;
-  final int? pop;
+  final double? pop;
   final Sys? sys;
   final DateTime? dtTxt;
+  final Rain? rain;
 
   ListElement({
     this.dt,
@@ -136,6 +137,7 @@ class ListElement {
     this.pop,
     this.sys,
     this.dtTxt,
+    this.rain,
   });
 
   factory ListElement.fromJson(String str) =>
@@ -153,9 +155,10 @@ class ListElement {
         clouds: json["clouds"] == null ? null : Clouds.fromMap(json["clouds"]),
         wind: json["wind"] == null ? null : Wind.fromMap(json["wind"]),
         visibility: json["visibility"],
-        pop: json["pop"],
+        pop: json["pop"]?.toDouble(),
         sys: json["sys"] == null ? null : Sys.fromMap(json["sys"]),
         dtTxt: json["dt_txt"] == null ? null : DateTime.parse(json["dt_txt"]),
+        rain: json["rain"] == null ? null : Rain.fromMap(json["rain"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -170,6 +173,7 @@ class ListElement {
         "pop": pop,
         "sys": sys?.toMap(),
         "dt_txt": dtTxt?.toIso8601String(),
+        "rain": rain?.toMap(),
       };
 }
 
@@ -245,6 +249,26 @@ class MainClass {
       };
 }
 
+class Rain {
+  final double? the3H;
+
+  Rain({
+    this.the3H,
+  });
+
+  factory Rain.fromJson(String str) => Rain.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Rain.fromMap(Map<String, dynamic> json) => Rain(
+        the3H: json["3h"]?.toDouble(),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "3h": the3H,
+      };
+}
+
 class Sys {
   final Pod? pod;
 
@@ -301,15 +325,31 @@ class Weather {
       };
 }
 
-enum Description { clearSky, fewClouds }
+enum Description {
+  brokenClouds,
+  clearSky,
+  fewClouds,
+  lightRain,
+  overcastClouds,
+  scatteredClouds,
+}
 
-final descriptionValues = EnumValues(
-    {"clear sky": Description.clearSky, "few clouds": Description.fewClouds});
+final descriptionValues = EnumValues({
+  "broken clouds": Description.brokenClouds,
+  "clear sky": Description.clearSky,
+  "few clouds": Description.fewClouds,
+  "light rain": Description.lightRain,
+  "overcast clouds": Description.overcastClouds,
+  "scattered clouds": Description.scatteredClouds,
+});
 
-enum MainEnum { clear, clouds }
+enum MainEnum { clear, clouds, rain }
 
-final mainEnumValues =
-    EnumValues({"Clear": MainEnum.clear, "Clouds": MainEnum.clouds});
+final mainEnumValues = EnumValues({
+  "Clear": MainEnum.clear,
+  "Clouds": MainEnum.clouds,
+  "Rain": MainEnum.rain
+});
 
 class Wind {
   final double? speed;

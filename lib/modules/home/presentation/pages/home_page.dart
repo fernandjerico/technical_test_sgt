@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:technical_test_sgt/core/theme/app_colors.dart';
 import 'dart:ui';
-import 'package:technical_test_sgt/modules/auth/presentation/pages/login_page.dart';
-import 'package:technical_test_sgt/modules/home/presentation/pages/weather_page.dart';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+
+import 'package:technical_test_sgt/core/theme/app_colors.dart';
+
+import '../../data/models/weather_forecast_hourly_response_model.dart';
 import '../bloc/get_current_weather/get_current_weather_bloc.dart';
 import '../bloc/get_weather_hourly/get_weather_hourly_bloc.dart';
+import '../widgets/nav_home.dart';
 import '../widgets/weather_initial.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,13 +38,32 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
+  void _showLocationDialog({required String title, required String content}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Service tidak aktif, bisa tampilkan dialog ke user
+      _showLocationDialog(
+        title: 'Location Service Disabled',
+        content: 'Please enable location services to use this feature.',
+      );
       return;
     }
 
@@ -52,11 +73,20 @@ class _HomePageState extends State<HomePage>
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         // Permission ditolak
+        _showLocationDialog(
+          title: 'Permission Denied',
+          content: 'Location permission is required to get weather data.',
+        );
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
+      _showLocationDialog(
+        title: 'Permission Denied Permanently',
+        content:
+            'Location permission is permanently denied. Please enable it from app settings.',
+      );
       return;
     }
 
@@ -231,178 +261,14 @@ class _HomePageState extends State<HomePage>
                             controller: _tabController,
                             children: [
                               // Hourly Forecast Tab
-                              BlocBuilder<GetWeatherHourlyBloc,
-                                  GetWeatherHourlyState>(
-                                builder: (context, state) {
-                                  return state.maybeWhen(
-                                    orElse: () => Center(
-                                        child: CircularProgressIndicator()),
-                                    error: (message) => Center(
-                                      child: Text(
-                                        message,
-                                        style:
-                                            const TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    loaded: (weather) {
-                                      return ListView.builder(
-                                        itemCount: weather.list?.length,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          final item = weather.list![index];
-                                          String time = '-';
-                                          if (item.dtTxt != null) {
-                                            final hour = item.dtTxt!.hour
-                                                .toString()
-                                                .padLeft(2, '0');
-                                            final minute = item.dtTxt!.minute
-                                                .toString()
-                                                .padLeft(2, '0');
-                                            time = '$hour:$minute';
-                                          }
-                                          return Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 16, horizontal: 8),
-                                            margin: EdgeInsets.only(
-                                                right: 6, left: 6),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              border: Border.all(
-                                                color: Colors.white
-                                                    .withValues(alpha: 0.2),
-                                                width: 1,
-                                              ),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  time,
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color:
-                                                          AppColors.whiteColor),
-                                                ),
-                                                Text(
-                                                    item.weather?[0].main
-                                                            ?.name ??
-                                                        '-',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: AppColors
-                                                            .whiteColor)),
-                                                Text(
-                                                  '${item.main?.temp?.round() ?? '-'}°C',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color:
-                                                          AppColors.whiteColor),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
+                              hourlyForecastTab(),
                               // Weekly Forecast Tab
-                              ListView.builder(
-                                itemCount: 7,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 16, horizontal: 8),
-                                    margin: EdgeInsets.only(right: 6, left: 6),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        color:
-                                            Colors.white.withValues(alpha: 0.2),
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'TUE',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppColors.whiteColor),
-                                        ),
-                                        Image.asset(
-                                            'assets/icons/cloud-mid-rain.png'),
-                                        Text(
-                                          '20°',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppColors.whiteColor),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
+                              weeklyForecastTab(),
                             ],
                           ),
                         ),
                         SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => LoginPage(),
-                                      ));
-                                },
-                                icon: Icon(
-                                  Icons.logout,
-                                  color: AppColors.whiteColor,
-                                )),
-                            Container(
-                              width: 58,
-                              height: 58,
-                              decoration: BoxDecoration(
-                                  color: AppColors.whiteColor,
-                                  shape: BoxShape.circle),
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.deepPurple,
-                                size: 28,
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => WeatherPage(),
-                                      ));
-                                },
-                                icon: SvgPicture.asset(
-                                    'assets/icons/icon-list.svg')),
-                          ],
-                        )
+                        NavHome(),
                       ],
                     ),
                   ),
@@ -410,6 +276,174 @@ class _HomePageState extends State<HomePage>
               )),
         ],
       ),
+    );
+  }
+
+  BlocBuilder<GetWeatherHourlyBloc, GetWeatherHourlyState> weeklyForecastTab() {
+    return BlocBuilder<GetWeatherHourlyBloc, GetWeatherHourlyState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => Center(child: CircularProgressIndicator()),
+          error: (message) => Center(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+          loaded: (weather) {
+            // Ambil hanya 1 data per hari (jam 12 siang)
+            final List<ListElement> daily = [];
+            final Set<String> addedDates = {};
+            for (final item in weather.list ?? []) {
+              if (item.dtTxt != null && item.dtTxt!.hour == 12) {
+                final dateStr =
+                    '${item.dtTxt!.year}-${item.dtTxt!.month.toString().padLeft(2, '0')}-${item.dtTxt!.day.toString().padLeft(2, '0')}';
+                if (!addedDates.contains(dateStr)) {
+                  daily.add(item);
+                  addedDates.add(dateStr);
+                }
+              }
+            }
+            if (daily.isEmpty) {
+              return Center(
+                  child: Text('No daily data available',
+                      style: TextStyle(color: Colors.white)));
+            }
+            return ListView.builder(
+              itemCount: daily.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final item = daily[index];
+                String day = '-';
+                if (item.dtTxt != null) {
+                  final dt = item.dtTxt!;
+                  day = [
+                    'MON',
+                    'TUE',
+                    'WED',
+                    'THU',
+                    'FRI',
+                    'SAT',
+                    'SUN'
+                  ][dt.weekday - 1];
+                }
+                String weatherMain = '-';
+                if (item.weather != null &&
+                    item.weather!.isNotEmpty &&
+                    item.weather![0].main != null) {
+                  weatherMain = item.weather![0].main!.name;
+                }
+                final temp = item.main?.temp?.round();
+                return Container(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  margin: EdgeInsets.only(right: 6, left: 6),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        day,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.whiteColor),
+                      ),
+                      Text(
+                        weatherMain,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.whiteColor),
+                      ),
+                      Text(
+                        '${temp ?? '-'}°C',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.whiteColor),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  BlocBuilder<GetWeatherHourlyBloc, GetWeatherHourlyState> hourlyForecastTab() {
+    return BlocBuilder<GetWeatherHourlyBloc, GetWeatherHourlyState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => Center(child: CircularProgressIndicator()),
+          error: (message) => Center(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+          loaded: (weather) {
+            return ListView.builder(
+              itemCount: weather.list?.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final item = weather.list![index];
+                String time = '-';
+                if (item.dtTxt != null) {
+                  final hour = item.dtTxt!.hour.toString().padLeft(2, '0');
+                  final minute = item.dtTxt!.minute.toString().padLeft(2, '0');
+                  time = '$hour:$minute';
+                }
+                return Container(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                  margin: EdgeInsets.only(right: 6, left: 6),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        time,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.whiteColor),
+                      ),
+                      Text(item.weather?[0].main?.name ?? '-',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.whiteColor)),
+                      Text(
+                        '${item.main?.temp?.round() ?? '-'}°C',
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.whiteColor),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 }
