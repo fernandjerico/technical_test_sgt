@@ -29,7 +29,7 @@ class WeatherForecastHourlyResponseModel {
         list: json["list"] == null
             ? []
             : List<ListElement>.from(
-                json["list"]!.map((x) => ListElement.fromMap(x))),
+                (json["list"] as List).map((x) => ListElement.fromMap(x))),
         city: json["city"] == null ? null : City.fromMap(json["city"]),
       );
 
@@ -151,7 +151,7 @@ class ListElement {
         weather: json["weather"] == null
             ? []
             : List<Weather>.from(
-                json["weather"]!.map((x) => Weather.fromMap(x))),
+                (json["weather"] as List).map((x) => Weather.fromMap(x))),
         clouds: json["clouds"] == null ? null : Clouds.fromMap(json["clouds"]),
         wind: json["wind"] == null ? null : Wind.fromMap(json["wind"]),
         visibility: json["visibility"],
@@ -281,7 +281,7 @@ class Sys {
   String toJson() => json.encode(toMap());
 
   factory Sys.fromMap(Map<String, dynamic> json) => Sys(
-        pod: podValues.map[json["pod"]]!,
+        pod: json["pod"] != null ? podValues.map[json["pod"]] : null,
       );
 
   Map<String, dynamic> toMap() => {
@@ -312,8 +312,10 @@ class Weather {
 
   factory Weather.fromMap(Map<String, dynamic> json) => Weather(
         id: json["id"],
-        main: mainEnumValues.map[json["main"]]!,
-        description: descriptionValues.map[json["description"]]!,
+        main: json["main"] != null ? mainEnumValues.map[json["main"]] : null,
+        description: json["description"] != null
+            ? descriptionValues.map[json["description"]]
+            : null,
         icon: json["icon"],
       );
 

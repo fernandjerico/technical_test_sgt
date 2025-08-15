@@ -27,8 +27,8 @@ class WeatherDatasourceImpl implements WeatherDatasource {
   @override
   Future<WeatherForecastHourlyResponseModel> getWeatherForecastHourly(
       String latitude, String longitude) async {
-    final response = await dio.get(
-        '/data/2.5/forecast?lat=$latitude&lon=$longitude&units=metric&cnt=40');
+    final response = await dio
+        .get('/data/2.5/forecast?lat=$latitude&lon=$longitude&units=metric');
     if (response.statusCode == 200) {
       return WeatherForecastHourlyResponseModel.fromMap(response.data);
     } else {

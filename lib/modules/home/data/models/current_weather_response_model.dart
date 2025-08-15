@@ -42,7 +42,7 @@ class CurrentWeatherResponseModel {
         weather: json["weather"] == null
             ? []
             : List<Weather>.from(
-                json["weather"]!.map((x) => Weather.fromMap(x))),
+                (json["weather"] as List).map((x) => Weather.fromMap(x))),
         base: json["base"],
         main: json["main"] == null ? null : Main.fromMap(json["main"]),
         visibility: json["visibility"],

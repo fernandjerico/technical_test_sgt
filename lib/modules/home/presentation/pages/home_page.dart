@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage>
                   filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 8.0),
                   child: Container(
                     width: double.infinity,
-                    height: size.height * 0.34,
+                    height: size.height * 0.36,
                     decoration: BoxDecoration(
                         border: Border(
                             left: BorderSide(color: Colors.white, width: 1),
@@ -415,11 +415,31 @@ class _HomePageState extends State<HomePage>
             ),
           ),
           loaded: (weather) {
+            // Filter data untuk hari ini saja
+            final today = DateTime.now();
+            final todayForecasts = weather.list?.where((item) {
+                  if (item.dtTxt == null) return false;
+                  final itemDate = item.dtTxt!;
+                  return itemDate.year == today.year &&
+                      itemDate.month == today.month &&
+                      itemDate.day == today.day;
+                }).toList() ??
+                [];
+
+            if (todayForecasts.isEmpty) {
+              return Center(
+                child: Text(
+                  'No forecast data for today',
+                  style: TextStyle(color: Colors.white),
+                ),
+              );
+            }
+
             return ListView.builder(
-              itemCount: weather.list?.length,
+              itemCount: todayForecasts.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                final item = weather.list![index];
+                final item = todayForecasts[index];
                 String time = '-';
                 if (item.dtTxt != null) {
                   final hour = item.dtTxt!.hour.toString().padLeft(2, '0');

@@ -30,13 +30,16 @@ class WeatherRepositoryImpl implements WeatherRepository {
     try {
       final response =
           await _datasource.getWeatherForecastHourly(latitude, longitude);
+      debugPrint("Weather forecast fetched successfully");
+      debugPrint("Response: $response");
       return Right(response);
     } on DioException catch (e) {
       debugPrint("DioError: ${e.message}");
       return Left(
           e.message ?? "An error occurred while fetching weather forecast");
     } catch (e) {
-      return Left("An unexpected error occurred: $e");
+      debugPrint("An unexpected error occurred: $e");
+      return Left("Failed to fetch weather forecast");
     }
   }
 }
